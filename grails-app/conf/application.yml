@@ -115,7 +115,7 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
+            dbCreate: update
             url: jdbc:mariadb://localhost:3306/fairtech_siakad_dev?useSSL=false
     test:
         dataSource:
@@ -143,3 +143,26 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+grails:
+    plugin:
+        springsecurity:
+            active: true
+            securityConfigType: 'InterceptUrlMap'
+            interceptUrlMap:
+                - pattern: '/user/index'
+                  access: ['IS_AUTHENTICATED_FULLY']
+                - pattern: '/**'
+                  access: ['IS_AUTHENTICATED_ANONYMOUSLY']
+            userLookup:
+                typeMappings:
+                    student:
+                        userDomainClassName: 'siakad.Student'
+                        usernamePropertyName: 'nim'
+                        passwordPropertyName: 'password'
+                    lecturer:
+                        userDomainClassName: 'siakad.Lecturer'
+                        usernamePropertyName: 'nim'
+                        passwordPropertyName: 'password'
+            password:
+                algorithm: 'bcrypt'
+                strength: 10
