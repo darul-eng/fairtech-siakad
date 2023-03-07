@@ -110,17 +110,17 @@ dataSource:
     username: "root"
     password: ''
     dialect: org.hibernate.dialect.MariaDB103Dialect
-    url: jdbc:mariadb://localhost:3306/fairtech_siakad?useSSL=false
+    url: jdbc:mariadb://localhost:3306/fairtech_siakad_dev?useSSL=false
 
 environments:
     development:
         dataSource:
             dbCreate: create-drop
-            url: jdbc:mariadb://localhost:3306/fairtech_siakad?useSSL=false
+            url: jdbc:mariadb://localhost:3306/fairtech_siakad_dev?useSSL=false
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:mariadb://localhost:3306/fairtech_siakad?useSSL=false
+            url: jdbc:mariadb://localhost:3306/fairtech_siakad_test?useSSL=false
     production:
         dataSource:
             dbCreate: none

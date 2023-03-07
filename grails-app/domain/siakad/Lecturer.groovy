@@ -2,30 +2,23 @@ package siakad
 
 import java.time.LocalDateTime
 
-class Course {
+class Lecturer {
+    Integer nip
     String name
-    String code
-    String semester
-    Integer sks
     LocalDateTime createdAt
     LocalDateTime updatedAt
 
     static constraints = {
+        nip nullable: false
         name nullable: false
-        code nullable: false
-        code unique: true
-        semester nullable: false
-        sks nullable: false
     }
 
     static mapping = {
-        table 'course'
+        table 'lecturer'
         version false
-        id column: 'course_id'
+        id column: 'lecturer_id'
+        nip column: 'nip'
         name column: 'name'
-        code column: 'code'
-        semester column: 'semester'
-        sks column: 'sks'
         createdAt column: 'created_at'
         updatedAt column: 'updated_at'
     }

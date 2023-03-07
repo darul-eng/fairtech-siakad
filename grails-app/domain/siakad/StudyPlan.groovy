@@ -2,25 +2,29 @@ package siakad
 
 import java.time.LocalDateTime
 
-class Transaction {
+class StudyPlan {
     Integer studentId
+    Integer courseId
     String status
-    String paymentURL
+    Integer grade
     LocalDateTime createdAt
     LocalDateTime updatedAt
 
     static constraints = {
         studentId nullable: false
+        courseId nullable: false
         status nullable: false
+        grade nullable: false
     }
 
     static mapping = {
-        table 'transaction'
+        table 'study_plan'
         version false
-        id column: 'transaction_id'
+        id column: 'study_plan_id'
         studentId column: 'student_id'
+        courseId column: 'course_id'
         status column: 'status'
-        paymentURL column: 'payment_url'
+        grade column: 'grade'
         createdAt column: 'created_at'
         updatedAt column: 'updated_at'
     }
