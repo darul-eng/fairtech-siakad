@@ -13,9 +13,13 @@ class UrlMappings {
         "/login" (controller: "auth", action: 'index')
         "/logout" (controller: 'auth', action: 'logout')
 
+        //mahasiswa
+        "/dashboard" (controller: "dashboard", action: 'index')
         "/student"(controller: "student", action: 'index')
-//        "/student"(controller: "student", action: 'save', method: "POST")
+        "/create-student"(controller: "student", action: 'createStudent')
+        "/save-student"(controller: "student", action: 'saveStudent', method: "POST")
 
+        //dosen
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')

@@ -1,15 +1,18 @@
 package siakad
 
+import javax.persistence.Table
 import java.sql.Timestamp
+import java.time.Year
 
+@Table(name = 'student')
 class Student {
     String nim
     String name
     String password
-    Integer yearOfEntry
-    Timestamp createdAt
-    Timestamp updatedAt
-    Major major
+    Year yearOfEntry
+    String createdAt
+    String updatedAt
+//    Major major
     static constraints = {
         nim blank: false
         nim unique: true
@@ -28,11 +31,8 @@ class Student {
         yearOfEntry column: 'year_of_entry'
         createdAt column: 'created_at'
         updatedAt column: 'updated_at'
-        major column: 'major'
-        major fetch: 'join', column: 'major_id'
+//        major column: 'major'
+//        major fetch: 'join', column: 'major_id'
     }
 
-    static Object findByNimAndPassword(LinkedHashMap<String, Object> stringObjectLinkedHashMap) {
-        null
-    }
 }

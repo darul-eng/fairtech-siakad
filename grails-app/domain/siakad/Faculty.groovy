@@ -7,7 +7,7 @@ class Faculty {
     String code
     LocalDateTime createdAt
     LocalDateTime updatedAt
-    static hasMany = [major: Major]
+//    static hasMany = [major: Major]
 
     static constraints = {
         name blank: false
@@ -22,6 +22,6 @@ class Faculty {
         code column: 'code'
         createdAt column: 'created_at'
         updatedAt column: 'updated_at'
-        major joinTable: [name: 'faculty_major', key: 'faculty_id', column: 'major_id']
+//        major joinTable: [name: 'faculty_major', key: 'faculty_id', column: 'major_id']
     }
 }

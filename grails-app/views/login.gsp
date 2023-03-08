@@ -23,7 +23,7 @@
                                 <g:if test="${flash.message}">
                                     <div class="alert alert-danger text-center">${flash.message}</div>
                                 </g:if>
-                                <g:form controller="auth" action="authenticate">
+                                <g:form controller="auth" action="authenticate" method="POST">
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="username" name="username" type="text" placeholder="username" />
                                         <label for="username">Username</label>
