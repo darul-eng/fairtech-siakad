@@ -24,19 +24,16 @@ class AuthController {
         if (Character.isLetter(username.charAt(0))){
             def student = Student.executeQuery("SELECT nim, name, password FROM Student WHERE nim =:nim", [nim: username])
 
-//            return render(student[0][1])
-            if (student != null) {
+            if (student != []) {
                 if (student[0][2] == encodedPassword) {
                     session.user = student
                     redirect(action: 'index')
                 }else{
-                    flash.message = "password salah"
-//                    flash.message = "Invalid username or password"
+                    flash.message = "Invalid username or password"
                     redirect(action: 'index')
                 }
             }else{
-                flash.message = "User not found"
-//                flash.message = "Invalid username or password"
+                flash.message = "Invalid username or password"
                 redirect(action: 'index')
             }
         }else{

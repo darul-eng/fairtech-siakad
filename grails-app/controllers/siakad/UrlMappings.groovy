@@ -18,6 +18,9 @@ class UrlMappings {
         "/student"(controller: "student", action: 'index')
         "/create-student"(controller: "student", action: 'createStudent')
         "/save-student"(controller: "student", action: 'saveStudent', method: "POST")
+        "/update-student/$id" (controller: "student", action: 'updateStudent')
+        "/store-student" (controller: 'student', action: 'storeStudent', method: "PATCH")
+        "/delete-student/$id"(controller: "student", action: "deleteStudent")
 
         //dosen
         "/"(view:"/index")

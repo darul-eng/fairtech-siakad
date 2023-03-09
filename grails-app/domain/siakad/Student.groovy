@@ -1,22 +1,26 @@
 package siakad
 
-import javax.persistence.Table
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 import java.sql.Timestamp
 import java.time.Year
 
-@Table(name = 'student')
 class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id
     String nim
     String name
     String password
-    Year yearOfEntry
-    String createdAt
-    String updatedAt
-//    Major major
+    String yearOfEntry
+    Timestamp createdAt
+    Timestamp updatedAt
+    Major major
     static constraints = {
-        nim blank: false
+        nim nullable: false
         nim unique: true
-        name blank: false
+        name nullable: false
         password nullable: false
         yearOfEntry nullable: false
     }
@@ -31,8 +35,7 @@ class Student {
         yearOfEntry column: 'year_of_entry'
         createdAt column: 'created_at'
         updatedAt column: 'updated_at'
-//        major column: 'major'
-//        major fetch: 'join', column: 'major_id'
+        major column: 'major'
+        major fetch: 'join', column: 'major_id'
     }
-
 }

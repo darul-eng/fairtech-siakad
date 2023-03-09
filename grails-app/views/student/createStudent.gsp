@@ -2,10 +2,6 @@
         <main>
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Student</h1>
-                <ol class="breadcrumb mb-4">
-%{--                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>--}%
-%{--                    <li class="breadcrumb-item active">Tables</li>--}%
-                </ol>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-user me-1"></i>
@@ -22,17 +18,23 @@
                                 <label for="name">Nama</label>
                                 <input type="text" class="form-control" name="name" id="name" placeholder="Nama">
                             </div>
+                            <label for="major">Jurusan</label>
                             <div class="form-group">
-                                <label for="major">Jurusan</label>
-                                <input type="text" class="form-control" name="major" id="major" placeholder="Jurusan">
+%{--                                <input type="text" class="form-control" name="major" id="major" placeholder="Jurusan">--}%
+                                <select class="form-control" id="major" name="major">
+                                <option value="">Pilih Jurusan</option>
+                                <g:each in="${majors}" var="major">
+                                    <option value="${major.id}">${major.name}</option>
+                                </g:each>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="year_of_entry">Angkatan</label>
-                                <input type="text" class="form-control" name="year_of_entry" id="year_of_entry" placeholder="Angkatan">
+                                <input type="text" class="form-control" name="year_of_entry" id="year_of_entry" placeholder="Angkatan" min="1900" max="2099">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="text" class="form-control" name="password" id="password" placeholder="Password">
+                                <input type="text" class="form-control" name="password" id="password" placeholder="Password" required>
                             </div>
                             <div class="form-group form-check">
                             </div>

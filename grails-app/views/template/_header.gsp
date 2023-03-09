@@ -10,11 +10,15 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <asset:stylesheet href="css/styles.css"></asset:stylesheet>
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/3.3.7/ui-bootstrap-tpls.min.js"></script>
+
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="${g.createLink(uri: '/create-student')}">SIAKAD</a>
+    <a class="navbar-brand ps-3" href="${g.createLink(uri: '/dashboard')}">SIAKAD</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -47,7 +51,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-dashboard"></i></div>
                         Dashboard
                     </a>
-                    <a class="nav-link ${uri == '/create-student' ? 'active' : ''} " href="${g.createLink(uri: '/create-student')}">
+                    <a class="nav-link ${uri == '/create-student' ? 'active' : '' || uri == '/student' ? 'active' : '' || uri == '/update-student' ? 'active' : ''}  " href="${g.createLink(uri: '/student')}">
                         <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                         Student
                     </a>
