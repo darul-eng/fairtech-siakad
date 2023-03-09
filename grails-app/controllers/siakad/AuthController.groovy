@@ -5,7 +5,8 @@ import java.security.MessageDigest
 class AuthController {
     def index() {
         if (session.user){
-            render('login sukses' + session.user)
+            flash.message = "Welcome " + session.user[0][1]
+            redirect(uri: '/dashboard')
         }else{
             render(view: '/login')
         }
@@ -21,16 +22,22 @@ class AuthController {
         String encodedPassword = new String(hash, "UTF-8")
 
         if (Character.isLetter(username.charAt(0))){
-            def student = Student.findByNimAndPassword(username: username, password: encodedPassword)
-            if (student != null) {
-                session.user = student
-                redirect(action: 'index')
+            def student = Student.executeQuery("SELECT nim, name, password FROM Student WHERE nim =:nim", [nim: username])
+
+            if (student != []) {
+                if (student[0][2] == encodedPassword) {
+                    session.user = student
+                    redirect(action: 'index')
+                }else{
+                    flash.message = "Invalid username or password"
+                    redirect(action: 'index')
+                }
             }else{
                 flash.message = "Invalid username or password"
                 redirect(action: 'index')
             }
         }else{
-            def lecturer = Lecturer.findByNipAndPassword(username: username, password: password)
+            def lecturer = Lecturer.findByNipAndPassword(nip: username, password: password)
             if (lecturer != null) {
                 session.user = lecturer
                 redirect(action: 'index')

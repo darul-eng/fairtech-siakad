@@ -1,19 +1,26 @@
 package siakad
 
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 import java.sql.Timestamp
+import java.time.Year
 
 class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id
     String nim
     String name
     String password
-    Integer yearOfEntry
+    String yearOfEntry
     Timestamp createdAt
     Timestamp updatedAt
     Major major
     static constraints = {
-        nim blank: false
+        nim nullable: false
         nim unique: true
-        name blank: false
+        name nullable: false
         password nullable: false
         yearOfEntry nullable: false
     }
@@ -30,9 +37,5 @@ class Student {
         updatedAt column: 'updated_at'
         major column: 'major'
         major fetch: 'join', column: 'major_id'
-    }
-
-    static Object findByNimAndPassword(LinkedHashMap<String, Object> stringObjectLinkedHashMap) {
-        null
     }
 }

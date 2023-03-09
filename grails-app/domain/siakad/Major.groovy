@@ -1,8 +1,14 @@
 package siakad
 
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 import java.time.LocalDateTime
 
 class Major {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id
     String name
     String code
     LocalDateTime createdAt
