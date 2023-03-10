@@ -22,6 +22,12 @@ class UrlMappings {
         "/store-student" (controller: 'student', action: 'storeStudent', method: "PATCH")
         "/delete-student/$id"(controller: "student", action: "deleteStudent")
 
+        "/study-plan" (controller: 'studyPlan', action: 'index')
+        "/add-course" (controller: "studyPlan", action: 'addCourse')
+        "/delete-study-plain/$id" (controller: "studyPlan", action: 'deleteCourse')
+
+        "/study-plan-result" (controller: 'studyPlan', action: 'studyPlanResult')
+
         //dosen
         "/"(view:"/index")
         "500"(view:'/error')

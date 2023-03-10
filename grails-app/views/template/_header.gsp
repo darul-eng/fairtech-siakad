@@ -55,6 +55,22 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                         Student
                     </a>
+                    <a class="nav-link ${uri == '/study-plan' ? 'active' : '' || uri == '/add-course' ? 'active' : ''} " href="${g.createLink(uri: '/study-plan')}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+                        KRS
+                    </a>
+                    <a class="nav-link ${uri == '/study-plan-result' ? 'active' : ''} " href="${g.createLink(uri: '/study-plan-result')}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                        Kartu Hasil Studi
+                    </a>
+                    <a class="nav-link ${uri == '/dashboard' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard')}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                        Pembayaran UKT
+                    </a>
+                    <a class="nav-link ${uri == '/dashboard' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard')}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+                        Transkrip
+                    </a>
 %{--                    <div class="sb-sidenav-menu-heading">Interface</div>--}%
 %{--                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">--}%
 %{--                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>--}%

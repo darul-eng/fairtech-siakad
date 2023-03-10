@@ -22,10 +22,10 @@ class AuthController {
         String encodedPassword = new String(hash, "UTF-8")
 
         if (Character.isLetter(username.charAt(0))){
-            def student = Student.executeQuery("SELECT nim, name, password FROM Student WHERE nim =:nim", [nim: username])
+            def student = Student.executeQuery("SELECT id, nim, name, password FROM Student WHERE nim =:nim", [nim: username])
 
             if (student != []) {
-                if (student[0][2] == encodedPassword) {
+                if (student[0][3] == encodedPassword) {
                     session.user = student
                     redirect(action: 'index')
                 }else{
