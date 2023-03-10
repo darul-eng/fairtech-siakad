@@ -15,7 +15,8 @@ class StudentService {
             throw new RuntimeException("Terjadi kesalahan saat menyimpan data:" + e)
         }
     }
-    def findStudent(int id) {
+    //
+    def findStudent(Long id) {
         try {
             return Student.findById(id)
         }catch (Exception e){

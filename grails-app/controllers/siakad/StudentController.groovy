@@ -61,41 +61,6 @@ class StudentController {
         }
     }
 
-    def list() {
-        try {
-            def students = studentService.getAllStudent()
-            [students: students]
-        }catch (Exception e){
-            log.error("Terjadi kesalahan saat mencari data: " + e.message)
-            flash.message = "Terjadi kesalahan saat mencari data: " + e.message
-            redirect(action: "index")
-        }
-    }
-
-    def find(int id) {
-        try {
-            def student = studentService.findStudent(id)
-            [student: student]
-        }catch (Exception e){
-            log.error("Terjadi kesalahan saat mencari data: " + e.message)
-            flash.message = "Terjadi kesalahan saat mencari data: " + e.message
-            redirect(action: "list")
-        }
-    }
-
-    def delete(int id){
-        def student = Student.get(id: id)
-        try {
-            studentService.deleteStudent(student)
-            flash.message = "Data student berhasil dihapus"
-            redirect(action: "list")
-        }catch (Exception e){
-            log.error("Terjadi kesalahan saat menghapus data: " + e.message)
-            flash.message = "Terjadi kesalahan saat menghapus data: " + e.message
-            redirect(action: "list")
-        }
-    }
-
     def updateStudent(Integer id){
         def student = Student.findById(id)
        if (student == null){
@@ -154,4 +119,41 @@ class StudentController {
             redirect(action: "index")
         }
     }
+
+
+    def list() {
+        try {
+            def students = studentService.getAllStudent()
+            [students: students]
+        }catch (Exception e){
+            log.error("Terjadi kesalahan saat mencari data: " + e.message)
+            flash.message = "Terjadi kesalahan saat mencari data: " + e.message
+            redirect(action: "index")
+        }
+    }
+
+    def find(int id) {
+        try {
+            def student = studentService.findStudent(id)
+            [student: student]
+        }catch (Exception e){
+            log.error("Terjadi kesalahan saat mencari data: " + e.message)
+            flash.message = "Terjadi kesalahan saat mencari data: " + e.message
+            redirect(action: "list")
+        }
+    }
+
+    def delete(int id){
+        def student = Student.get(id: id)
+        try {
+            studentService.deleteStudent(student)
+            flash.message = "Data student berhasil dihapus"
+            redirect(action: "list")
+        }catch (Exception e){
+            log.error("Terjadi kesalahan saat menghapus data: " + e.message)
+            flash.message = "Terjadi kesalahan saat menghapus data: " + e.message
+            redirect(action: "list")
+        }
+    }
+
 }

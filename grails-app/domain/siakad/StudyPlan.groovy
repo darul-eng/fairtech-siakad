@@ -1,14 +1,21 @@
 package siakad
 
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import java.sql.Timestamp
 import java.time.LocalDateTime
 
 class StudyPlan {
-    Integer studentId
-    Integer courseId
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id
+    Long studentId
     String status
-    Integer grade
-    LocalDateTime createdAt
-    LocalDateTime updatedAt
+    Double grade
+    Course course
+    Timestamp createdAt
+    Timestamp updatedAt
 
     static constraints = {
         studentId nullable: false
@@ -22,7 +29,8 @@ class StudyPlan {
         version false
         id column: 'study_plan_id'
         studentId column: 'student_id'
-        courseId column: 'course_id'
+        course column: 'course'
+        course fetch: 'join', column: 'course_id'
         status column: 'status'
         grade column: 'grade'
         createdAt column: 'created_at'
