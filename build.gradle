@@ -76,7 +76,7 @@ dependencies {
     testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:4.0.0"
     testRuntimeOnly "org.seleniumhq.selenium:selenium-firefox-driver:4.0.0"
     //add
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.8'
+    implementation 'mysql:mysql-connector-java:8.0.26'
 }
 
 bootRun {

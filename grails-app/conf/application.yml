@@ -106,25 +106,24 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName: org.mariadb.jdbc.Driver
+    driverClassName: "com.mysql.cj.jdbc.Driver"
     username: "root"
-    password: ''
-    dialect: org.hibernate.dialect.MariaDB103Dialect
-    url: jdbc:mariadb://localhost:3306/fairtech_siakad_dev?useSSL=false
+    password: "password"
+    dialect: "org.hibernate.dialect.MySQL8Dialect"
 
 environments:
     development:
         dataSource:
             dbCreate: update
-            url: jdbc:mariadb://localhost:3306/fairtech_siakad_dev?useSSL=false
+            url: "jdbc:mysql://localhost:1234/db_fairtech_siakad?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false"
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:mariadb://localhost:3306/fairtech_siakad_test?useSSL=false
+            url: "jdbc:mysql://localhost:1234/db_fairtech_siakad_test?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false"
     production:
         dataSource:
             dbCreate: none
-            url: jdbc:mariadb://localhost:3306/fairtech_siakad?useSSL=false
+            url: "jdbc:mysql://localhost:1234/db_fairtech_siakad?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false"
             properties:
                 jmxEnabled: true
                 initialSize: 5
