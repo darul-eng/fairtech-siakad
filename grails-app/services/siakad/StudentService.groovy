@@ -1,11 +1,14 @@
 package siakad
 
-import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 
 @Transactional
-@Service
 class StudentService {
+
+    List<Student> getStudentList(){
+        List<Student> students = Student.findAll()
+        return students
+    }
 
     def saveStudent(Student student) {
         try {
@@ -15,6 +18,13 @@ class StudentService {
             throw new RuntimeException("Terjadi kesalahan saat menyimpan data:" + e)
         }
     }
+
+    Student getStudentById(Long id) {
+        Student student = Student.findById(id)
+        return student
+    }
+
+
     //
     def findStudent(Long id) {
         try {

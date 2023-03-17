@@ -2,8 +2,18 @@ package siakad
 
 
 class AuthMiddlewareInterceptor {
+    AuthMiddlewareInterceptor() {
+        matchAll()
+                .excludes(controller: "auth")
+    }
 
-    boolean before() { true }
+    boolean before() {
+        if (session.user == null ) {
+            redirect(controller: 'auth', action: 'index')
+            return false
+        }
+        true
+    }
 
     boolean after() { true }
 

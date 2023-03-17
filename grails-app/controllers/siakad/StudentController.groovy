@@ -6,105 +6,100 @@ import java.security.MessageDigest
 
 @Transactional
 class StudentController {
-    def studentService
+    StudentService studentService
+    MajorService majorService
 
     def index() {
-        def data = [
-                "name": "Darul Ikhsan",
-                "students": Student::list(),
-                "uri": "/student"
-        ]
-        render(view: "/student/index", model: data)
+        List<Student> students = studentService.getStudentList()
+        render(view: "/student/index", model: [
+                students: students
+        ])
     }
 
     def createStudent(){
-        def data = [
-                "uri": "/create-student",
-                "majors": Major::list()
-        ]
-        render(view: "/student/createStudent", model: data)
+        List<Major> majors = majorService.getMajorList()
+        render(view: "/student/createStudent", model: [
+                majors: majors
+        ])
     }
+
     def saveStudent() {
-        def password = params.password
-        String salt = 'mysalt'
+        Student student = new Student(params)
 
-        MessageDigest digest = MessageDigest.getInstance("SHA-256")
-        byte[] hash = digest.digest((password + salt).getBytes("UTF-8"))
-        String encodedPassword = new String(hash, "UTF-8")
+        if (student.validate()){
+            String password = student.password
+            String salt = 'mysalt'
 
-        def today = new Date()
-        def student = new Student(
-                nim: params.nim,
-                name: params.name,
-                yearOfEntry: params.year_of_entry,
-                major: params.major,
-                password: encodedPassword,
-                createdAt: today.toTimestamp(),
-                updatedAt: today.toTimestamp()
-        )
+            MessageDigest digest = MessageDigest.getInstance("SHA-256")
+            byte[] hash = digest.digest((password + salt).getBytes("UTF-8"))
+            String encodedPassword = new String(hash, "UTF-8")
 
-        try {
+            Date today = new Date()
+            student.password = encodedPassword
+            student.createdAt = today.toTimestamp()
+            student.updatedAt = today.toTimestamp()
             student.save(flush:true)
-            if (!student.save(flush:true)) {
-                student.errors.allErrors.each {error ->
-                    log.error(error.toString())
-                }
-            }
-//            studentService.saveStudent(student)
+
             flash.message = "Data Siswa Berhasil di simpan"
             redirect(action: "index")
-        }catch (Exception e){
-            log.error("Terjadi kesalahan saat menyimpan data: " + e.message)
-            flash.message = "Terjadi kesalahan saat menyimpan data: " + e.message
-            throw new RuntimeException("Error" + e.message)
-            redirect(action: "createStudent")
+        }else{
+           render(view: 'createStudent', model: [student: student, majors: Major.getAll()])
         }
     }
 
-    def updateStudent(Integer id){
-        def student = Student.findById(id)
-       if (student == null){
-           flash.message = "Student not found"
-           redirect(action: "index")
-       }else {
-           def data = [
-                   "student": student,
-                   "uri": "/update-student",
-                   "majors": Major::list()
-           ]
-           render(view: '/student/updateStudent', model: data)
+    def updateStudent(Long id){
+        Student student = studentService.getStudentById(id)
+        if (student == null){
+            flash.message = "Student not found"
+            redirect(action: "index")
+        }else {
+           render(view: '/student/updateStudent', model: [
+                   student: student,
+                   majors: majorService.getMajorList()
+           ])
        }
 
     }
 
     def storeStudent(){
-        def id = params.id
-        def student = Student.findById(id)
+        Student request = new Student(params)
+        Student student = studentService.getStudentById(params.id as Long)
+        if (request.validate()){
 
-        def today = new Date()
-        def major = Major.get(params.major)
 
-        student.nim = params.nim
-        student.name = params.name
-        student.yearOfEntry = params.year_of_entry
-        student.major = major
-        student.updatedAt = today.toTimestamp()
-
-        try {
-            student.save(flush:true)
-            if (!student.save(flush:true)) {
-                student.errors.allErrors.each {error ->
-                    log.error(error.toString())
-                }
+        }else{
+            request.errors.allErrors.each {
+                println(it)
             }
-            flash.message = "Data Siswa Berhasil di perbarui"
-            redirect(action: "index")
-        }catch (Exception e){
-            log.error("Terjadi kesalahan saat menyimpan data: " + e.message)
-            flash.message = "Terjadi kesalahan saat menyimpan data: " + e.message
-            throw new RuntimeException("Error" + e.message)
-            redirect(action: "updateStudent")
+            render(view: 'updateStudent', model: [student: student, majors: majorService.getMajorList()])
         }
+//        def id = params.id
+//        def student = Student.findById(id)
+//
+//        def today = new Date()
+//        def major = Major.get(params.major)
+//
+//        student.nim = params.nim
+//        student.name = params.name
+//        student.yearOfEntry = params.year_of_entry
+//        student.major = major
+//        student.updatedAt = today.toTimestamp()
+//
+//        try {
+//            student.save(flush:true)
+//            if (!student.save(flush:true)) {
+//                student.errors.allErrors.each {error ->
+//                    log.error(error.toString())
+//                }
+//            }
+//            flash.message = "Data Siswa Berhasil di perbarui"
+//            redirect(action: "index")
+//        }catch (Exception e){
+//            log.error("Terjadi kesalahan saat menyimpan data: " + e.message)
+//            flash.message = "Terjadi kesalahan saat menyimpan data: " + e.message
+//            throw new RuntimeException("Error" + e.message)
+//            redirect(action: "updateStudent")
+//        }
     }
 
     def deleteStudent(Integer id){

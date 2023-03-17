@@ -6,14 +6,12 @@ import grails.gorm.transactions.Transactional
 class StudyPlanController {
 
     def index() {
-        def currentUser = session.user
-        def studentId = currentUser[0][0]
+        Student currentUser = session.user
+        Long studentId = currentUser.id
 
-        def data = [
+        render(view: '/studyPlan/index', model: [
                 "studyPlans": StudyPlan.findAllByStudentId(studentId),
-                "uri": "/study-plan"
-        ]
-        render(view: '/studyPlan/index', model: data)
+        ])
     }
 
     def addCourse(){
@@ -25,12 +23,12 @@ class StudyPlanController {
     }
 
     def saveCourse(){
-        def currentUser = session.user
-        def studentId = currentUser[0][0]
-        def course = Course.get(params.id)
+        Student currentUser = session.user
+        Long studentId = currentUser.id
+        Course course = Course.get(params.id)
 
-        def today = new Date()
-        def studyPlan = new StudyPlan(
+        Date today = new Date()
+        StudyPlan studyPlan = new StudyPlan(
                 studentId: studentId,
                 course: course,
                 grade: 0,

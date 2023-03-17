@@ -14,7 +14,7 @@
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
                 List Students
-                <a href="${g.createLink(uri: '/create-student')}" class="btn btn-primary float-right" >Add New Student</a>
+                <a href="${g.createLink(uri: '/dashboard/create-student')}" class="btn btn-primary float-right" >Add New Student</a>
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -39,8 +39,8 @@
                             <td>${student.major.faculty.name}</td>
                             <td>${student.yearOfEntry}</td>
                             <td>
-                                <a href="${g.createLink(uri: '/update-student/' + student.id)}" class="badge badge-pill badge-warning">update</a>
-                                <a href="${g.createLink(uri: '/delete-student/' + student.id)}" class="badge badge-pill badge-danger">delete</a>
+                                <a href="${g.createLink(uri: '/dashboard/update-student/' + student.id)}" class="badge badge-pill badge-warning">update</a>
+                                <a href="${g.createLink(uri: '/dashboard/delete-student/' + student.id)}" class="badge badge-pill badge-danger">delete</a>
                             </td>
                         </tr>
                     </g:each>

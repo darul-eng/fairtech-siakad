@@ -1,11 +1,13 @@
 package siakad
 
+import io.micronaut.http.HttpStatus
+
 import java.security.MessageDigest
 
 class AuthController {
     def index() {
         if (session.user){
-            flash.message = "Welcome " + session.user[0][1]
+            flash.message = "Welcome " + session.user.name
             redirect(uri: '/dashboard')
         }else{
             render(view: '/login')
@@ -21,29 +23,28 @@ class AuthController {
         byte[] hash = digest.digest((password + salt).getBytes("UTF-8"))
         String encodedPassword = new String(hash, "UTF-8")
 
-        if (Character.isLetter(username.charAt(0))){
-            def student = Student.executeQuery("SELECT id, nim, name, password FROM Student WHERE nim =:nim", [nim: username])
-
-            if (student != []) {
-                if (student[0][3] == encodedPassword) {
+        if (username == "" || password == ""){
+            flash.message = "Invalid username or password"
+            respond[:], view: "/login", status: 400
+        }else{
+            if (isStudent(username)) {
+                Student student = Student.findByNimAndPassword(username, encodedPassword)
+                if (student != null && student.password == encodedPassword){
                     session.user = student
                     redirect(action: 'index')
                 }else{
                     flash.message = "Invalid username or password"
-                    redirect(action: 'index')
+                    respond[:], view: "/login", status: 400
                 }
             }else{
-                flash.message = "Invalid username or password"
-                redirect(action: 'index')
-            }
-        }else{
-            def lecturer = Lecturer.findByNipAndPassword(nip: username, password: password)
-            if (lecturer != null) {
-                session.user = lecturer
-                redirect(action: 'index')
-            }else{
-                flash.message = "Invalid username or password"
-                redirect(action: 'index')
+                Lecturer lecturer = Lecturer.findByNipAndPassword(username, encodedPassword)
+                if (lecturer != null && lecturer.password == encodedPassword){
+                    session.user = lecturer
+                    redirect(action: 'index')
+                }else{
+                    flash.message = "Invalid username or password"
+                    respond[:], view: "/login", status: 400
+                }
             }
         }
     }
@@ -51,5 +52,13 @@ class AuthController {
     def logout(){
         session.user = null
         redirect(action: 'index')
+    }
+
+    def isStudent(String username) {
+        if (Character.isLetter(username.charAt(0))) {
+            return true
+        }else {
+            return false
+        }
     }
 }

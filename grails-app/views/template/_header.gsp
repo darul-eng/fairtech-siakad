@@ -47,27 +47,27 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading"></div>
-                    <a class="nav-link ${uri == '/dashboard' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard')}">
+                    <a class="nav-link ${request.getRequestURI() == '/dashboard' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard')}">
                         <div class="sb-nav-link-icon"><i class="fas fa-dashboard"></i></div>
                         Dashboard
                     </a>
-                    <a class="nav-link ${uri == '/create-student' ? 'active' : '' || uri == '/student' ? 'active' : '' || uri == '/update-student' ? 'active' : ''}  " href="${g.createLink(uri: '/student')}">
+                    <a class="nav-link ${request.getRequestURI() == '/dashboard/create-student' ? 'active' : '' || request.getRequestURI() == '/dashboard/student' ? 'active' : '' || request.getRequestURI().startsWith("/dashboard/update-student")  ? 'active' : '' || request.getRequestURI().startsWith("/dashboard/save-student")  ? 'active' : ''}  " href="${g.createLink(uri: '/dashboard/student')}">
                         <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                         Student
                     </a>
-                    <a class="nav-link ${uri == '/study-plan' ? 'active' : '' || uri == '/add-course' ? 'active' : ''} " href="${g.createLink(uri: '/study-plan')}">
+                    <a class="nav-link ${request.getRequestURI() == '/dashboard/study-plan' ? 'active' : '' || request.getRequestURI() == '/dashboard/add-course' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard/study-plan')}">
                         <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                         KRS
                     </a>
-                    <a class="nav-link ${uri == '/study-plan-result' ? 'active' : ''} " href="${g.createLink(uri: '/study-plan-result')}">
+                    <a class="nav-link ${request.getRequestURI() == '/dashboard/study-plan-result' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard/study-plan-result')}">
                         <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                         Kartu Hasil Studi
                     </a>
-                    <a class="nav-link ${uri == '/dashboard' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard')}">
+                    <a class="nav-link ${request.getRequestURI() == '/dashboard' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard')}">
                         <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
                         Pembayaran UKT
                     </a>
-                    <a class="nav-link ${uri == '/dashboard' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard')}">
+                    <a class="nav-link ${request.getRequestURI() == '/dashboard' ? 'active' : ''} " href="${g.createLink(uri: '/dashboard')}">
                         <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                         Transkrip
                     </a>

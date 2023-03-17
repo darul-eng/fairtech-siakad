@@ -14,7 +14,13 @@
                     </div>
                     <div class="form-group">
                         <label for="nim">NIM</label>
-                        <input type="text" class="form-control" name="nim" id="nim" placeholder="nim" value="${student.nim}">
+                        <div class='value ${hasErrors(bean:student,field:'nim','errors')}'>
+                            <input type="text" class="form-control" id="nim" name="nim" placeholder="NIM" value="${fieldValue(bean:student,field:'nim')}"/>
+                            <g:hasErrors bean="${student}" field="nim">
+                                <small class="errors text-danger"><g:message error="${student.errors.getFieldError('nim')}" /></small>
+                            </g:hasErrors>
+                        </div>
+%{--                        <input type="text" class="form-control" name="nim" id="nim" placeholder="nim" value="${student.nim}">--}%
                         %{--                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--}%
                     </div>
                     <div class="form-group">
